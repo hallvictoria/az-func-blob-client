@@ -7,9 +7,6 @@ from typing import Any, Optional, Union
 
 # DATA IS MODEL_BINDING_DATA
 
-blob_client.get_blob_name()
-blob_client.name
-
 class BlobClient():
     # Change constructor to only take in data -- parse to get connection string, container name, and blob name
     def __init__(self, *, data: Union[bytes, Datum],
