@@ -13,30 +13,7 @@ class BlobClientConverter(InConverter,
     
     @classmethod
     def check_input_type_annotation(cls, pytype: type) -> bool:
-        return issubclass(pytype, (SdkType, bytes, str))
-
-    @classmethod
-    def check_output_type_annotation(cls, pytype: type) -> bool:
-        return (
-            issubclass(pytype, (str, bytes, bytearray, SdkType))
-            or callable(getattr(pytype, 'read', None))
-        )
-
-    @classmethod
-    def encode(cls, obj: Any, *,
-               expected_type: Optional[type]) -> Datum:
-        if callable(getattr(obj, 'read', None)):
-            # file-like object
-            obj = obj.read()
-
-        if isinstance(obj, str):
-            return Datum(type='string', value=obj)
-
-        elif isinstance(obj, (bytes, bytearray)):
-            return Datum(type='bytes', value=bytes(obj))
-
-        else:
-            raise NotImplementedError
+        return issubclass(pytype, (BlobClient, bytes, str))
 
     @classmethod
     # NEED TO ADD PYTYPE AS ADDITIONAL PARAMETER
