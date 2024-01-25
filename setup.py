@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='az-func-blob-client',
-    version='0.0.1',
+    name='azfuncblobclient',
+    version='0.0.2',
     author='Your Name',
     author_email='your.email@example.com',
     description='A short description of your package',
@@ -14,7 +14,7 @@ setup(
     ],
     python_requires='>=3.7',
     install_requires=[
-        'az-func-binding-base',
+        'azfuncbindingbase',
         'azure-storage-blob'
     ],
 )

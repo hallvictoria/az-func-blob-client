@@ -3,7 +3,7 @@ import os
 
 from typing import Any, Optional
 
-from az.func.binding.base import Datum, InConverter, OutConverter, SdkType
+from azfuncbindingbase import Datum, InConverter, OutConverter, SdkType
 from .blobClient import BlobClient
 
 class BlobClientConverter(InConverter,

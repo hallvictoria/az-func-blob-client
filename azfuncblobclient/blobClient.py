@@ -1,9 +1,9 @@
 import json
 import os
 
-from az.func.binding.base import Datum, SdkType
+from azfuncbindingbase import Datum, SdkType
 from azure.storage.blob import BlobClient as BlobClientSdk
-from typing import Any, Optional, Union
+from typing import Union
 
 # DATA IS MODEL_BINDING_DATA
 
