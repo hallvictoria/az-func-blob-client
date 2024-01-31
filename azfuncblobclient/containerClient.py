@@ -2,10 +2,11 @@ import json
 import os
 
 from azfuncbindingbase import Datum, SdkType
-from azure.storage.blob import BlobClient as BlobClientSdk
+from azure.storage.blob import ContainerClient as ContainerClientSdk
 from typing import Union
 
-class BlobClient(SdkType):
+
+class ContainerClient(SdkType):
     def __init__(self, *, data: Union[bytes, Datum]) -> None:
 
         # model_binding_data properties
@@ -25,12 +26,10 @@ class BlobClient(SdkType):
             self._containerName = content_json["ContainerName"]
             self._blobName = content_json["BlobName"]
 
-    # no getters b/c not exposing any other properties
 
-    # Returns a BlobClient
+    # Returns a ContainerClient
     def get_sdk_type(self):
-        return BlobClientSdk.from_connection_string(
+        return ContainerClientSdk.from_connection_string(
             conn_str=self._connection,
-            container_name=self._containerName,
-            blob_name=self._blobName
+            container_name=self._containerName
         )

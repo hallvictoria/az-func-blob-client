@@ -5,6 +5,7 @@ from typing import Any, Optional
 
 from azfuncbindingbase import Datum, InConverter, OutConverter, SdkType
 from .blobClient import BlobClient
+from .containerClient import ContainerClient
 
 class BlobClientConverter(InConverter,
                           OutConverter,
@@ -16,9 +17,7 @@ class BlobClientConverter(InConverter,
         return issubclass(pytype, (BlobClient, bytes, str))
 
     @classmethod
-    # NEED TO ADD PYTYPE AS ADDITIONAL PARAMETER
-    # do I need to parse the trigger_metadata?
-    def decode(cls, data: Datum, *, trigger_metadata) -> Any:
+    def decode(cls, data: Datum, *, trigger_metadata, pytype) -> Any:
         if data is None or data.type is None:
             return None
 
@@ -32,6 +31,10 @@ class BlobClientConverter(InConverter,
                 f': {data_type!r}'
             )
 
-        # SWITCH STATEMENT HERE ON SPECIFIC PY TYPE
-
-        return BlobClient(data=data).get_sdk_type()
+        # Determines which sdk type to return based on pytype
+        if isinstance(pytype, BlobClient):
+            return BlobClient(data=data).get_sdk_type()
+        elif isinstance(pytype, ContainerClient):
+            return ContainerClient(data=data).get_sdk_type()
+        else:
+            return None
