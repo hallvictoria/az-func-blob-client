@@ -6,6 +6,7 @@ from typing import Any, Optional
 from azfuncbindingbase import Datum, InConverter, OutConverter, SdkType
 from .blobClient import BlobClient
 from .containerClient import ContainerClient
+from .storageStreamDownloader import StorageStreamDownloader
 
 class BlobClientConverter(InConverter,
                           OutConverter,
@@ -32,9 +33,11 @@ class BlobClientConverter(InConverter,
             )
 
         # Determines which sdk type to return based on pytype
-        if isinstance(pytype, BlobClient):
+        if pytype == BlobClient:
             return BlobClient(data=data).get_sdk_type()
-        elif isinstance(pytype, ContainerClient):
+        elif pytype == ContainerClient:
             return ContainerClient(data=data).get_sdk_type()
+        elif pytype == StorageStreamDownloader:
+            return StorageStreamDownloader(data=data).get_sdk_type()
         else:
             return None
