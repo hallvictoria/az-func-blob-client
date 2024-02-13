@@ -26,7 +26,6 @@ class StorageStreamDownloader(SdkType):
             self._containerName = content_json["ContainerName"]
             self._blobName = content_json["BlobName"]
 
-
     # Returns a StorageStreamDownloader
     def get_sdk_type(self):
         # Create BlobClient

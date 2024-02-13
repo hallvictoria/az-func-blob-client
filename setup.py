@@ -1,8 +1,20 @@
 from setuptools import setup, find_packages
 
+EXTRA_REQUIRES = {
+    'dev': [
+        'flake8~=4.0.1',
+        'flake8-logging-format',
+        'mypy',
+        'pytest',
+        'pytest-cov',
+        'requests==2.*',
+        'coverage'
+    ]
+}
+
 setup(
     name='azfuncblobclient',
-    version='0.0.2',
+    version='0.0.5',
     author='Your Name',
     author_email='your.email@example.com',
     description='A short description of your package',
@@ -17,4 +29,5 @@ setup(
         'azfuncbindingbase',
         'azure-storage-blob'
     ],
+    extras_require=EXTRA_REQUIRES,
 )

@@ -15,7 +15,7 @@ class BlobClientConverter(InConverter,
     
     @classmethod
     def check_input_type_annotation(cls, pytype: type) -> bool:
-        return issubclass(pytype, (BlobClient, bytes, str))
+        return issubclass(pytype, (BlobClient, ContainerClient, StorageStreamDownloader))
 
     @classmethod
     def decode(cls, data: Datum, *, trigger_metadata, pytype) -> Any:

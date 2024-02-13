@@ -26,7 +26,6 @@ class ContainerClient(SdkType):
             self._containerName = content_json["ContainerName"]
             self._blobName = content_json["BlobName"]
 
-
     # Returns a ContainerClient
     def get_sdk_type(self):
         return ContainerClientSdk.from_connection_string(
