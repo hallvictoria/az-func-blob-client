@@ -1,9 +1,13 @@
+#  Copyright (c) Microsoft Corporation. All rights reserved.
+#  Licensed under the MIT License.
+
 import json
 import os
 
 from azfuncbindingbase import Datum, SdkType
 from azure.storage.blob import BlobClient as BlobClientSdk
 from typing import Union
+
 
 class BlobClient(SdkType):
     def __init__(self, *, data: Union[bytes, Datum]) -> None:

@@ -1,3 +1,6 @@
+#  Copyright (c) Microsoft Corporation. All rights reserved.
+#  Licensed under the MIT License.
+
 import json
 import os
 
@@ -17,7 +20,7 @@ class StorageStreamDownloader(SdkType):
         self._connection = ""
         self._containerName = ""
         self._blobName = ""
-        if data is not {}:
+        if self._data:
             self._version = data.version
             self._source = data.source
             self._content_type = data.content_type
@@ -28,10 +31,13 @@ class StorageStreamDownloader(SdkType):
 
     # Returns a StorageStreamDownloader
     def get_sdk_type(self):
-        # Create BlobClient
-        blob_client = BlobClientSdk.from_connection_string(
-            conn_str=self._connection,
-            container_name=self._containerName,
-            blob_name=self._blobName)
-        # download_blob() returns a StorageStreamDownloader object
-        return blob_client.download_blob()
+        if self._data:
+            # Create BlobClient
+            blob_client = BlobClientSdk.from_connection_string(
+                conn_str=self._connection,
+                container_name=self._containerName,
+                blob_name=self._blobName)
+            # download_blob() returns a StorageStreamDownloader object
+            return blob_client.download_blob()
+        else:
+            return None

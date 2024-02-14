@@ -1,21 +1,23 @@
-import json
-import os
+#  Copyright (c) Microsoft Corporation. All rights reserved.
+#  Licensed under the MIT License.
 
-from typing import Any, Optional
+from typing import Any
 
-from azfuncbindingbase import Datum, InConverter, OutConverter, SdkType
+from azfuncbindingbase import Datum, InConverter, OutConverter
 from .blobClient import BlobClient
 from .containerClient import ContainerClient
 from .storageStreamDownloader import StorageStreamDownloader
+
 
 class BlobClientConverter(InConverter,
                           OutConverter,
                           binding='blob',
                           trigger='blobTrigger',):
-    
+
     @classmethod
     def check_input_type_annotation(cls, pytype: type) -> bool:
-        return issubclass(pytype, (BlobClient, ContainerClient, StorageStreamDownloader))
+        return issubclass(pytype, (BlobClient, ContainerClient,
+                                   StorageStreamDownloader))
 
     @classmethod
     def decode(cls, data: Datum, *, trigger_metadata, pytype) -> Any:
